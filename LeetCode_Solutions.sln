@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Easy Problems", "Easy Probl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwoSum_Easy", "TwoSum\TwoSum_Easy.csproj", "{DC802FD7-D54D-4A00-8AC1-81A6CDFFB25A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RomanToInteger", "RomanToInteger\RomanToInteger.csproj", "{AC7A0D6C-5AD7-4430-B457-5953682F33E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{DC802FD7-D54D-4A00-8AC1-81A6CDFFB25A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC802FD7-D54D-4A00-8AC1-81A6CDFFB25A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC802FD7-D54D-4A00-8AC1-81A6CDFFB25A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC7A0D6C-5AD7-4430-B457-5953682F33E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC7A0D6C-5AD7-4430-B457-5953682F33E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC7A0D6C-5AD7-4430-B457-5953682F33E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC7A0D6C-5AD7-4430-B457-5953682F33E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{04610D61-9E2C-4638-A6CF-7D78B9FC7B3E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{DC802FD7-D54D-4A00-8AC1-81A6CDFFB25A} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{AC7A0D6C-5AD7-4430-B457-5953682F33E4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D6E06A9-0136-45EF-919B-4387765E4C16}
