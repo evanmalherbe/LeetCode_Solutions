@@ -5,7 +5,7 @@ This repository is for all the leetcode coding challenges I've done - [LeetCode 
 I mainly focus on coding challenges using C# (.NET Core and Framework), Javascript and SQL.
 
 ## Solutions
-### Two Sum - Easy
+### 1. Two Sum - Easy
 
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
 
@@ -29,7 +29,7 @@ Output: [0,1]
 
 Only one valid answer exists.
 
-### Palindrome Number - Easy
+### 9. Palindrome Number - Easy
 Given an integer x, return true if x is a palindrome, and false otherwise.
 
 **Example 1:**
