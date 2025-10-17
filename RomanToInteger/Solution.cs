@@ -146,15 +146,21 @@ namespace RomanToInteger
 			int index = 0;
 			foreach (var translation in translations)
 			{
-				if (index != 0 && skipTypes.FirstOrDefault(i => i.Type == translation.Type).ToSkip == true)
+				if (index != 0)
 				{
 					continue;
 				}
 				if (s.Contains(translation.Roman))
 				{
+					// remove matched string from original string
+					int lengthOfMatchedString = translation.Roman.Length;
+					int indexOfString = s.IndexOf(translation.Roman);
+					if (indexOfString != -1) 
+					{
+						s.Remove(indexOfString, lengthOfMatchedString);
+					}
+					// add number to total
 					numbers.Add(translation.Number);
-					SkipType skipValue = skipTypes.FirstOrDefault(i => i.Type == translation.Type && i.ToSkip == false);
-					skipValue.ToSkip = true;
 				}
 				index++;
 			}
