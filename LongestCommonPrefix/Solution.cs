@@ -9,9 +9,13 @@ namespace LongestCommonPrefix
 {
 	public class Solution
 	{
-		public string CheckForPrefixes(int lengthOfStringArray, string[] strs)
+		public string CheckForPrefixes(int lengthOfShortestString, string commonPrefix, int lengthOfStringArray, string[] strs, int inputIndex)
 		{
-			string commonPrefix = "";
+			if (inputIndex == lengthOfShortestString)
+			{
+				return string.Empty;
+			}
+
 			int index = 0;
 			// Set inital values of bool array
 			List<bool> bools = new List<bool>() { false , false, false};
@@ -22,8 +26,24 @@ namespace LongestCommonPrefix
 				{
 					// initial prefix
 					char[] chars = str.ToCharArray();
-					commonPrefix = chars[0].ToString();
-					bools[index] = true;
+					if (commonPrefix == "")
+					{
+						commonPrefix = chars[0].ToString();
+						bools[index] = true;
+					}
+					else
+					{
+						// compare next string's prefix with initial one
+						int prefixLength = commonPrefix.Length;
+						if (prefixLength > 0) 
+						{
+							string subString = str.Substring(0, prefixLength);
+							if (subString == commonPrefix) 
+							{
+								bools[index] = true;
+							}
+						}
+					}
 				}
 				else 
 				{
@@ -49,8 +69,7 @@ namespace LongestCommonPrefix
 					else
 					{
 						// so far so good. Go for another letter in prefix
-						string localCommonPrefix = CheckForPrefixes(lengthOfStringArray, strs);
-						commonPrefix = localCommonPrefix;
+						string localCommonPrefix = CheckForPrefixes(lengthOfShortestString, commonPrefix, lengthOfStringArray, strs, inputIndex + 1);
 					}
 				}
 				index++;
@@ -60,9 +79,20 @@ namespace LongestCommonPrefix
 		public string LongestCommonPrefix(string[] strs) 
 		{
 			int lengthOfStringArray = strs.Length;
+			int lengthOfShortestString = 0;
+			foreach(string word in strs) 
+			{
+				int lengthOfWord = word.Length;
+				if (lengthOfShortestString == 0) { lengthOfShortestString = lengthOfWord; }
+				if (lengthOfShortestString != 0 && lengthOfWord < lengthOfShortestString) 
+				{
+					lengthOfShortestString = lengthOfWord;
+				}
+			}
+
 			if (lengthOfStringArray > 0)
 			{
-				string thePrefix = CheckForPrefixes(lengthOfStringArray, strs);
+				string thePrefix = CheckForPrefixes(lengthOfShortestString, "", lengthOfStringArray, strs, 0);
 				return thePrefix;
 			}
 			return "";
