@@ -77,22 +77,22 @@ X can be placed before L (50) and C (100) to make 40 and 90.
 C can be placed before D (500) and M (1000) to make 400 and 900.
 Given a roman numeral, convert it to an integer.
 
-** Example 1:<br>
+** Example 1:**<br>
 Input: s = "III"<br>
 Output: 3<br>
 Explanation: III = 3.<br>
 
-** Example 2:<br>
+** Example 2:**<br>
 Input: s = "LVIII"<br>
 Output: 58<br>
 Explanation: L = 50, V= 5, III = 3.<br>
 
-** Example 3:<br>
+** Example 3:**<br>
 Input: s = "MCMXCIV"<br>
 Output: 1994<br>
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.<br>
  
-** Constraints:<br>
+** Constraints:**<br>
 - 1 <= s.length <= 15<br>
 - s contains only the characters ('I', 'V', 'X', 'L', 'C', 'D', 'M').<br>
 - It is guaranteed that s is a valid roman numeral in the range [1, 3999].<br>
