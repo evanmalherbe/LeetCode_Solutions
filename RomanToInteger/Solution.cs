@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RomanToInteger
@@ -25,16 +27,6 @@ namespace RomanToInteger
 					return -1;
 				}
 			}
-
-			//Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
-			//Symbol       Value
-			//I             1
-			//V             5
-			//X             10
-			//L             50
-			//C             100
-			//D             500
-			//M             1000	
 
 			List<Translation> translations = new List<Translation>()
 			{
@@ -143,22 +135,9 @@ namespace RomanToInteger
 				new SkipType() {Type = "1", ToSkip = false}
 			};
 
-			foreach (var translation in translations)
-			{
-				if (s.Contains(translation.Roman))
-				{
-					// remove matched string from original string
-					int lengthOfMatchedString = translation.Roman.Length;
-					int indexOfString = s.IndexOf(translation.Roman);
-					if (indexOfString != -1) 
-					{
-						s = s.Remove(indexOfString, lengthOfMatchedString);
-					}
-					// add number to total
-					numbers.Add(translation.Number);
-				}
-			}
-
+			Response result = DoTranslation(translations, s, numbers, false);
+			numbers = result.numberList;
+		
 			int total = 0;
 			foreach (int num in numbers)
 			{
@@ -167,6 +146,48 @@ namespace RomanToInteger
 
 			return total;
 		}
-
+		public class Response
+		{
+			public List<int> numberList { get; set; }
+			public string newString { get; set; }
+			public bool IsDone { get; set; }
+		}
+		public Response DoTranslation(List<Translation> translations,string s, List<int> numbers, bool IsDone)
+		{
+			List<int> numberList = numbers;
+			if (!IsDone)
+			{
+				foreach (var translation in translations)
+				{
+					if (s.Contains(translation.Roman))
+					{
+						// remove matched string from original string
+						int lengthOfMatchedString = translation.Roman.Length;
+						int indexOfString = s.IndexOf(translation.Roman);
+						if (indexOfString != -1) 
+						{
+							s = s.Remove(indexOfString, lengthOfMatchedString);
+						}
+						else
+						{
+							Console.WriteLine("");
+						}
+						// add number to total
+						numberList.Add(translation.Number);
+						break;
+					}
+				}
+				if (s.Length > 0)
+				{
+					DoTranslation(translations, s, numbers, IsDone);
+				}
+				else
+				{
+					return new Response() { numberList = numberList, newString = s, IsDone = true};
+				}
+			}
+			
+			return new Response() { numberList = numberList, newString = s, IsDone = true};
+		}
 	}
 }
