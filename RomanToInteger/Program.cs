@@ -11,8 +11,12 @@ namespace RomanToInteger
 		static void Main(string[] args)
 		{
 			Solution solution = new Solution();
-			int answer = solution.RomanToInteger("III");
-			Console.WriteLine(answer);
+			int answer = solution.RomanToInteger("LVIII");
+			if (answer == -1) 
+			{
+				Console.WriteLine("Too many or too few characters");
+			}
+			Console.WriteLine("Answer: " + answer);
 		}
 	}
 }
