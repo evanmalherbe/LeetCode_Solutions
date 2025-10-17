@@ -4,13 +4,13 @@ This repository is for all the leetcode coding challenges I've done - [LeetCode 
 ## Languages
 I mainly focus on coding challenges using C# (.NET Core and Framework), Javascript and SQL.
 
-## Solutions
-1. [1. Two Sum - Easy](#1-two-sum---easy)
-2. [9. Palindrome Number - Easy](#9-palindrome-number---easy)
-3. [13. Roman To Integer - Easy](#13-roman-to-integer---easy)
----
+## Solutions (Easy)
+1. [1. Two Sum](#1-two-sum)
+2. [9. Palindrome Number](#9-palindrome-number)
+3. [13. Roman To Integer](#13-roman-to-integer)
 
-## 1. Two Sum - Easy
+## 1. Two Sum
+### Difficulty - Easy
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
 
 **Example 1:**
@@ -33,7 +33,8 @@ Output: [0,1]
 
 Only one valid answer exists.
 
-## 9. Palindrome Number - Easy
+## 9. Palindrome Number
+### Difficulty - Easy
 Given an integer x, return true if x is a palindrome, and false otherwise.
 
 **Example 1:**
@@ -54,7 +55,8 @@ Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 **Constraints:**
 -231 <= x <= 231 - 1
 
-## 13. RomanToInteger - Easy
+## 13. Roman To Integer
+### Difficulty - Easy
 Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
 
 Symbol       Value
