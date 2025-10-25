@@ -15,14 +15,15 @@ namespace LongestCommonPrefix
 			{
 				return (commonPrefix, true);
 			}
-			if (lengthOfShortestString != 1 && inputIndex  == lengthOfShortestString - 1)
+			if (lengthOfShortestString != 1 && inputIndex > lengthOfShortestString)
 			{
-				return (string.Empty,false);
+				return (commonPrefix,false);
 			}
-			if (lengthOfShortestString == 1)
-			{
-				return (shortestWord,true);
-			}
+			//if (lengthOfShortestString == 1)
+			//{
+			//	// might be the problem
+			//	return (shortestWord,true);
+			//}
 			int index = 0;
 			// Set inital values of bool array
 			List<bool> bools = new List<bool>();
@@ -33,6 +34,12 @@ namespace LongestCommonPrefix
 			// check for common prefix
 			foreach (string str in strs) 
 			{
+				if (str.Length == 0)
+				{
+					commonPrefix = "";
+					break;
+				}
+
 				if (index == 0)
 				{
 					// initial prefix
@@ -45,10 +52,18 @@ namespace LongestCommonPrefix
 					else
 					{
 						// if common prefix is no longer "", but index is 0, try adding another letter to prefix
-						if ((inputIndex + 1) <= str.Length)
+						if (inputIndex <= str.Length - 1)
 						{
-							commonPrefix = str.Substring(0, inputIndex + 1);
+							commonPrefix = str.Substring(0, inputIndex);
 							bools[index] = true;
+						}
+						else
+						{
+							if (str.Length == inputIndex)
+							{
+								commonPrefix = str.Substring(0, inputIndex);
+								bools[index] = true;
+							}
 						}
 					}
 				}
@@ -66,27 +81,33 @@ namespace LongestCommonPrefix
 								bools[index] = true;
 							}	
 						}
+						// else bools[index] = false
+						// it's false by default so no need to set it
 					}
 				}
 				// last run loop through input strings
 				if (index == lengthOfStringArray - 1)
 				{
+					// if any of the comparisons is false
 					boolListHasFalse = bools.Contains(false);
 					if (boolListHasFalse)
 					{
+						// remove one letter from commonPrefix, because not all words had this common prefix in this last round of testing
+						commonPrefix = commonPrefix.Substring(0, commonPrefix.Length - 1);
 						// no more matches
 						break;
 					}
 					else
 					{
-						if (boolListHasFalse)
-						{
-							return (commonPrefix,boolListHasFalse);
-						}
+						inputIndex++;
 						// so far so good. Go for another letter in prefix
-						(string,bool) commonPrefixResponse = CheckForPrefixes(shortestWord, lengthOfShortestString, commonPrefix, lengthOfStringArray, strs, inputIndex + 1, boolListHasFalse);
+						(string,bool) commonPrefixResponse = CheckForPrefixes(shortestWord, lengthOfShortestString, commonPrefix, lengthOfStringArray, strs, inputIndex, boolListHasFalse);
 						boolListHasFalse = commonPrefixResponse.Item2;
-						if (boolListHasFalse)
+						if (inputIndex == lengthOfShortestString - 1)
+						{
+							return (commonPrefixResponse.Item1,boolListHasFalse);
+						}
+						else
 						{
 							return (commonPrefixResponse.Item1,boolListHasFalse);
 						}
@@ -99,9 +120,13 @@ namespace LongestCommonPrefix
 		public string LongestCommonPrefix(string[] strs) 
 		{
 			int lengthOfStringArray = strs.Length;
-			if (lengthOfStringArray == 0 || strs.Any(i => i == ""))
+			if (lengthOfStringArray == 0)
 			{
 				return "";
+			}
+			if (lengthOfStringArray == 1)
+			{
+				return strs[0];
 			}
 			int lengthOfShortestString = 0;
 			string shortestWord = "";
@@ -110,7 +135,13 @@ namespace LongestCommonPrefix
 			foreach(string word in strs) 
 			{
 				int lengthOfWord = word.Length;
-				if (lengthOfWord == 1)
+				if (lengthOfWord == 0)
+				{
+					shortestWord = word;
+					lengthOfShortestString = lengthOfWord;
+					break;
+				}
+				else if (lengthOfWord == 1)
 				{
 					shortestWord = word;
 					lengthOfShortestString = lengthOfWord;
@@ -118,14 +149,20 @@ namespace LongestCommonPrefix
 				}
 				else
 				{
+					// if no shortest words have been recorded yet
 					if (lengthOfShortestString == 0) { lengthOfShortestString = lengthOfWord; }
+					// if no shortest word has been recorded yet
+					if (shortestWord == "") { shortestWord = word; }
+					// if record exists, check if this word is shorter
 					if (lengthOfShortestString != 0 && lengthOfWord < lengthOfShortestString) 
 					{
+						// if shorter, it becomes shortest word
 						lengthOfShortestString = lengthOfWord;
+						shortestWord = word;
 					}
 					else
 					{
-						break;
+						continue;
 					}
 				}
 			}
@@ -135,10 +172,7 @@ namespace LongestCommonPrefix
 				(string, bool) prefixResponse = CheckForPrefixes(shortestWord, lengthOfShortestString, "", lengthOfStringArray, strs, 0, boolListHasFalse);
 				if (prefixResponse.Item1 != null && prefixResponse.Item1 != "" && prefixResponse.Item1.Length > 0) 
 				{
-					string finalPrefix = prefixResponse.Item1.Length != 1 
-						? prefixResponse.Item1.Substring(0, prefixResponse.Item1.Length - 1)
-						: prefixResponse.Item1;
-					return finalPrefix;
+					return prefixResponse.Item1;
 				}
 				else
 				{
